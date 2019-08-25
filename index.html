@@ -23,12 +23,6 @@
           text-align: center;
         }
 
-        .stickyBottom {
-          position: -webkit-sticky; /* Safari */
-          position: absolute;
-          bottom: 0;
-          background-color: #11181f;
-        }
         
         .day {
           width: 18%;
@@ -36,48 +30,46 @@
           float: left;
           background-color: #fff;
           background-image: linear-gradient(rgba(0,0,0,.08) 50%, transparent 50%);
-          background-size: 1px 20%;
+          background-size: 1px 16.667%;
         }
         
         .day.time { width: 10%; }
         
         .day_title {
-          height: 10%;
+          height: 8.333%;
           background-color: #34495e;
-          font-size: 12px;
+          font-size: 16px;
           font-weight: 600;
           text-transform: uppercase;
           text-align: center;
-          line-height: 10vh;
+          line-height: 8.333vh;
         }
         
         .hour {
-          height: 10%;
+          height: 8.333%;
           background-color: rgba(52, 73, 94,0.9);
-          font-size: 12px;
+          font-size: 14px;
           text-align: center;
-          line-height: 10vh;
+          line-height: 8.333vh;
         }
         
         .class {
           width: 100%;
-          height: 15vh; /*90min*/
-          line-height: 15vh;
+          height: 16.667vh; /*120min*/
+          line-height: 16vh;
           background-color: magenta;
           font-size: 2vw;
           font-weight: 300;
           padding-left: 10px;
+          padding-right: 10px;
+          text-align: center;
         }
         
-        .class.short { height: 10vh; line-height: 10vh; } /* 45min class */
-        .class.normal { height: 20vh; line-height: 20vh; } /* 120min class */
-        .class.b15 { margin-top: 2.5vh; } /* after 15 min break */
-        .class.b45 { margin-top: 7.5vh; } /* after 45 min break */
-        .class.b60 { margin-top: 10vh; } /* after 60 min break */
-        .class.b90 { margin-top: 15vh; } /* after 2x45 min break */
-        .class.b120 { margin-top: 20vh; } /* after 120 min break */
-        .class.b135 { margin-top: 22.5vh; } /* after 3x45 min break */
-        .class.b180 { margin-top: 30vh; } /* after 180 min break */
+        .class.short { height: 8.333vh; line-height: 8.333vh; } /* 60min class */
+        .class.normal { height: 16.667vh; line-height: 16.667vh; } /* 120min class */
+        .class.b60 { margin-top: 8.333vh; } /* after 60 min break */
+        .class.b120 { margin-top: 16.667vh; } /* after 120 min break */
+        .class.b180 { margin-top: 25vh; } /* after 180 min break */
         
         .green { background-color: #2ecc71; }
         .turquoise { background-color: #1abc9c; }
@@ -121,7 +113,7 @@
           background-color: black;
           color: #fff;
           content: attr(data-tooltip);
-          text-align: center;
+          text-align: center; 
           font-size: 14px;
           line-height: 1.2;
         }
@@ -165,6 +157,8 @@
         <div class="hour">14:00</div>
         <div class="hour">15:00</div>
         <div class="hour">16:00</div>
+        <div class="hour">17:00</div>
+        <div class="hour">18:00</div>
     </div>
     
     <div class="day monday">
@@ -172,17 +166,18 @@
         <div class="class b120 short blue" data-tooltip="Digital Signal Processing">KIE3007 [G1]</div>
         <div class="class normal orange" data-tooltip="Wireless Communication">KIE4014 [G1]</div>
         <div class="class b60 normal purple" data-tooltip="Optical Communication">KIE4015 [G1]</div>
+        <div class="class b60 normal turquoise" data-tooltip="Attach@Industry">GKA1001 [G1]</div>
     </div>
     
     <div class="day tuesday">
         <div class="day_title">Tuesday</div>
-        <div class="class b180 normal gray" data-tooltip="Power System">KIE4004 [G2]</div>
+        <div class="class normal gray" data-tooltip="Power System">KIE4004 [G2]</div>
     </div>
     
     <div class="day wednesday">
         <div class="day_title">Wednesday</div>
         <div class="class normal yellow" data-tooltip="Analog VLSI Circuit Design">KIE4019 [G1]</div>
-        <div class="class b60 short gray" data-tooltip="Power System">KIE4004 [G2]</div>
+        <div class="class short gray" data-tooltip="Power System">KIE4004 [G2]</div>
     </div>
     
     <div class="day thursday">
@@ -193,7 +188,7 @@
     
     <div class="day friday">
       <div class="day_title">Friday</div>
-        <div class="class b120 normal green" data-tooltip="Architechture">KIE4018 [G1]</div>
+        <div class="class b120 normal green" data-tooltip="VLSI Design">KIE4018 [G1]</div>
     </div>
 </body>
 </html>
