@@ -40,7 +40,7 @@
       // Put variables in global scope to make them available to the browser console.
       const constraints = window.constraints = {
         audio: false,
-        video: true
+        video: {VideoConstraints.facingMode = 'environment';}
       };
 
       function handleSuccess(stream) {
@@ -80,7 +80,7 @@
   </head>
 
   <body>
-      <video id="gum-local" width="128" height="128" autoPlay playsinline></video>
+      <video id="gum-local" width="300" height="300" autoPlay playsinline></video>
       <div id="label"></div>
       <div id="errorMsg"></div>
   </body>
