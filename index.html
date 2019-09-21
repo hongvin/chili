@@ -40,7 +40,9 @@
       // Put variables in global scope to make them available to the browser console.
       const constraints = window.constraints = {
         audio: false,
-        video: {facingMode : 'environment'}
+        video: {facingMode : 'environment',
+        width: 300,
+        height: 300}
       };
 
       function handleSuccess(stream) {
