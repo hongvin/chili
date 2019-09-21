@@ -4,12 +4,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
 
     <script>
+      function hasGetUserMedia() {
+        return (navigator.getUserMedia || navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+    }
+
+    if (hasGetUserMedia()){
       tf.loadLayersModel('https://raw.githubusercontent.com/khvmaths/khvmaths.github.io/master/model.json')
         .then(function (model) {
           console.log(model)
           const webrtcElement = document.getElementById("gum-local");
           window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
-        })
+        })}
       // const model = await tf.loadModel('localstorage://model.json');
       // const webrtcElement = document.getElementById("gum-local");
       // window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
@@ -19,19 +25,16 @@
         if(document.getElementById("gum-local").readyState ===4){
         const tensor = tf.browser.fromPixels(webrtcElement);
         const eTensor = tensor.expandDims(0).asType('float32').div(256.0);
-        const pred = model.predict(eTensor);
-        max = tf.argMax(pred, 1)
-        const index = max.get([0])
-        const label = imagenetLabels[index]
+        const pred = model.predict(eTensor)
+        var readable_output = pred.dataSync();
+        console.log(readable_output);
+        // console.log(max)
+        // const index = max.get([0])
+        const label = 'A: '+readable_output[0]+'  B: '+readable_output[1]+'  C: '+readable_output[2];
         const labelElement = document.getElementById("label");
         labelElement.innerHTML = label
         window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
       }}
-
-      const imagenetLabels = {
-        0:'A',
-        1:'B',
-        2:'C'}
 
 
       /////////////////
