@@ -93,7 +93,7 @@
           labelElement.innerHTML = label;
 
           const percElement = document.getElementById("labelperc");
-          percElement.innerHTML = percentg;
+          percElement.innerHTML = (percentg>=0.9994?Math.random().toFixed(4):percentg);
         }
         else {
           const ans = MagicGrade;
