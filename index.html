@@ -10,7 +10,6 @@
 
   <!-- Load TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
   <script>
     function hasGetUserMedia() {
@@ -26,67 +25,6 @@
           window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
         })
     }
-    // const model = await tf.loadModel('localstorage://model.json');
-    // const webrtcElement = document.getElementById("gum-local");
-    // window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
-
-    /////////////HighChart/////////////////
-    window.onload=function(){
-    var ctx = document.getElementById('myChart');
-
-    var myChart = new Chart(ctx, {
-      type: 'horizontalBar',
-      data: {
-        labels:['A','B','C'],
-        datasets: [{
-          data: [0,0,0],
-          
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              min:0,
-              max:1
-            }
-          }]
-        },
-        legend: {
-          display: false
-        }
-      },
-      responsive: true
-    });
-    }
-
-    function addData(chart, label, data) {
-      chart.data.labels.push(label);
-      chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-      });
-      chart.update();
-    }
-
-    function removeData(chart) {
-      chart.data.labels.pop();
-      chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-      });
-      chart.update();
-    }
 
     function onFrame(model, webrtcElement) {
       if (document.getElementById("gum-local").readyState === 4) {
@@ -95,14 +33,23 @@
         const pred = model.predict(eTensor)
         var readable_output = pred.dataSync();
         console.log(readable_output);
-        removeData(myChart);
-        addData(myChart, 'A', readable_output[0]);
-        addData(myChart, 'B', readable_output[1]);
-        addData(myChart, 'C', readable_output[2]);
-        // console.log(max)
-        // const index = max.get([0])
+
+        var ans = ' '
+
+        if ((readable_output[0]>readable_output[1]) && (readable_output[0]>readable_output[2])){
+          ans = 'A'
+        }
+        if ((readable_output[1]>readable_output[0]) && (readable_output[1]>readable_output[2])){
+          ans = 'B'
+        }
+        if ((readable_output[2]>readable_output[1]) && (readable_output[2]>readable_output[0])){
+          ans = 'C'
+        }
+        const ansElement=document.getElementById("labelans");
+        ansElement.innerHTML = ans
+
         const label = 'Ripe'
-        const labelElement = document.getElementById("label");
+        const labelElement = document.getElementById("labelripe");
         labelElement.innerHTML = label
 
         window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
@@ -167,11 +114,12 @@
       </div>
       <div class="row">
         <div class="col">
-          <canvas id="myChart" width="500" height="200"></canvas>
-          <!--<div id="label"></div>-->
+          Class: 
+          <div id="labelans" style="font-size:50px"></div>
         </div>
-        <div class="col" width="200" height="200">
-          Ripeness:  <div id="label"></div>
+        <div class="col">
+          Ripeness:  
+          <div id="labelripe" style="font-size:50px"></div>
         </div>
       </div>
     </div>
