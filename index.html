@@ -28,6 +28,7 @@
     var MagicPowder = false;
     var MagicGrade = "";
     var MagicRipe = "";
+    var MagicPerc = "";
 
     var fireBase_Data = database.ref('user');
 
@@ -35,6 +36,7 @@
       MagicPowder = snapshot.child('override_model').val();
       MagicGrade = snapshot.child('grade').val();
       MagicRipe = snapshot.child('ripe').val();
+      MagicPerc = snapshot.child('percentage').val();
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
@@ -67,13 +69,13 @@
           var ans = ' '
 
           if ((readable_output[0] > readable_output[1]) && (readable_output[0] > readable_output[2])) {
-            ans = 'A'
+            ans = 'A ('+readable_output+')'
           }
           if ((readable_output[1] > readable_output[0]) && (readable_output[1] > readable_output[2])) {
-            ans = 'B'
+            ans = 'B ('+readable_output+')'
           }
           if ((readable_output[2] > readable_output[1]) && (readable_output[2] > readable_output[0])) {
-            ans = 'C'
+            ans = 'C ('+readable_output+')'
           }
 
 
@@ -87,10 +89,11 @@
         }
         else {
           const ans = MagicGrade;
+          const per = MagicPerc;
           const label = (MagicRipe == true)?"Ripe":"Not Ripe";
 
           const ansElement = document.getElementById("labelans");
-          ansElement.innerHTML = ans 
+          ansElement.innerHTML = ans + ' ('+per+')'
 
           const labelElement = document.getElementById("labelripe");
           labelElement.innerHTML = label
