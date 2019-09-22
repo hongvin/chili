@@ -113,6 +113,7 @@
 
 
         window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
+      setTimeout(onFrame,0.5,model,webrtcElement);
       }
     }
 
