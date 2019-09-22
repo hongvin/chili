@@ -66,37 +66,48 @@
           var readable_output = pred.dataSync();
           console.log(readable_output);
 
-          var ans = ' '
+          var ans = ' ';
+          var percentg = '';
 
           if ((readable_output[0] > readable_output[1]) && (readable_output[0] > readable_output[2])) {
-            ans = 'A ('+readable_output[0].toFixed(4)+')'
+            ans = 'A';
+            percentg = readable_output[0].toFixed(4);
+
           }
           if ((readable_output[1] > readable_output[0]) && (readable_output[1] > readable_output[2])) {
-            ans = 'B ('+readable_output[1].toFixed(4)+')'
+            ans = 'B';
+            percentg = readable_output[1].toFixed(4);
           }
           if ((readable_output[2] > readable_output[1]) && (readable_output[2] > readable_output[0])) {
-            ans = 'C ('+readable_output[2].toFixed(4)+')'
+            ans = 'C';
+            percentg = readable_output[2].toFixed(4);
           }
 
 
-          const label = 'Ripe'
+          const label = 'Ripe';
 
           const ansElement = document.getElementById("labelans");
-          ansElement.innerHTML = ans
+          ansElement.innerHTML = ans;
 
           const labelElement = document.getElementById("labelripe");
-          labelElement.innerHTML = label
+          labelElement.innerHTML = label;
+
+          const percElement = document.getElementById("labelperc");
+          percElement.innerHTML = percentg;
         }
         else {
           const ans = MagicGrade;
           const per = MagicPerc;
-          const label = (MagicRipe == true)?"Ripe":"Not Ripe";
+          const label = (MagicRipe == true) ? "Ripe" : "Not Ripe";
 
           const ansElement = document.getElementById("labelans");
-          ansElement.innerHTML = ans + ' ('+per+')'
+          ansElement.innerHTML = ans;
 
           const labelElement = document.getElementById("labelripe");
-          labelElement.innerHTML = label
+          labelElement.innerHTML = label;
+
+          const percElement = document.getElementById("labelperc");
+          percElement.innerHTML = per;
         }
 
 
@@ -171,6 +182,11 @@
       <div class="section" style="padding-top: 20px">
         Ripeness:
         <div id="labelripe" style="font-size:30px"></div>
+      </div>
+
+      <div class="section" style="padding-top: 20px">
+        Percentage:
+        <div id="labelperc" style="font-size:30px"></div>
       </div>
 
 
