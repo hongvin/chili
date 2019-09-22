@@ -86,10 +86,10 @@
         }
         else {
           const ans = MagicGrade;
-          const label = MagicRipe;
+          const label = (MagicRipe == true)?"Ripe":"Not Ripe";
 
           const ansElement = document.getElementById("labelans");
-          ansElement.innerHTML = ans
+          ansElement.innerHTML = ans 
 
           const labelElement = document.getElementById("labelripe");
           labelElement.innerHTML = label
