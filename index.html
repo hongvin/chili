@@ -24,9 +24,9 @@
     };
     firebase.initializeApp(config);
     var database = firebase.database();
-    var MagicPowder=false;
-    var MagicGrade="";
-    var MagicRipe="";
+    var MagicPowder = false;
+    var MagicGrade = "";
+    var MagicRipe = "";
 
     var fireBase_Data = database.ref('user');
 
@@ -56,40 +56,46 @@
 
     function onFrame(model, webrtcElement) {
       if (document.getElementById("gum-local").readyState === 4) {
-        if(MagicPowder==false){
-        const tensor = tf.browser.fromPixels(webrtcElement);
-        const eTensor = tensor.expandDims(0).asType('float32').div(256.0);
-        const pred = model.predict(eTensor)
-        var readable_output = pred.dataSync();
-        console.log(readable_output);
+        if (MagicPowder == false) {
+          const tensor = tf.browser.fromPixels(webrtcElement);
+          const eTensor = tensor.expandDims(0).asType('float32').div(256.0);
+          const pred = model.predict(eTensor)
+          var readable_output = pred.dataSync();
+          console.log(readable_output);
 
-        var ans = ' '
+          var ans = ' '
 
-        if ((readable_output[0] > readable_output[1]) && (readable_output[0] > readable_output[2])) {
-          ans = 'A'
-        }
-        if ((readable_output[1] > readable_output[0]) && (readable_output[1] > readable_output[2])) {
-          ans = 'B'
-        }
-        if ((readable_output[2] > readable_output[1]) && (readable_output[2] > readable_output[0])) {
-          ans = 'C'
-        }
-       
+          if ((readable_output[0] > readable_output[1]) && (readable_output[0] > readable_output[2])) {
+            ans = 'A'
+          }
+          if ((readable_output[1] > readable_output[0]) && (readable_output[1] > readable_output[2])) {
+            ans = 'B'
+          }
+          if ((readable_output[2] > readable_output[1]) && (readable_output[2] > readable_output[0])) {
+            ans = 'C'
+          }
 
-        const label = 'Ripe'
-        
+
+          const label = 'Ripe'
+
+          const ansElement = document.getElementById("labelans");
+          ansElement.innerHTML = ans
+
+          const labelElement = document.getElementById("labelripe");
+          labelElement.innerHTML = label
         }
-        else
-        {
-          const ans=MagicGrade;
-          const label=MagicRipe;
+        else {
+          const ans = MagicGrade;
+          const label = MagicRipe;
+
+          const ansElement = document.getElementById("labelans");
+          ansElement.innerHTML = ans
+
+          const labelElement = document.getElementById("labelripe");
+          labelElement.innerHTML = label
         }
 
-        const ansElement = document.getElementById("labelans");
-        ansElement.innerHTML = ans
 
-        const labelElement = document.getElementById("labelripe");
-        labelElement.innerHTML = label
 
         window.requestAnimationFrame(onFrame.bind(null, model, webrtcElement));
       }
