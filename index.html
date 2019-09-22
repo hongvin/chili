@@ -69,13 +69,13 @@
           var ans = ' '
 
           if ((readable_output[0] > readable_output[1]) && (readable_output[0] > readable_output[2])) {
-            ans = 'A ('+readable_output+')'
+            ans = 'A ('+readable_output[0].toFixed(4)+')'
           }
           if ((readable_output[1] > readable_output[0]) && (readable_output[1] > readable_output[2])) {
-            ans = 'B ('+readable_output+')'
+            ans = 'B ('+readable_output[1].toFixed(4)+')'
           }
           if ((readable_output[2] > readable_output[1]) && (readable_output[2] > readable_output[0])) {
-            ans = 'C ('+readable_output+')'
+            ans = 'C ('+readable_output[2].toFixed(4)+')'
           }
 
 
