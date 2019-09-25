@@ -48,7 +48,7 @@
     }
 
     if (hasGetUserMedia()) {
-      tf.loadLayersModel('https://raw.githubusercontent.com/khvmaths/khvmaths.github.io/master/model.json')
+      tf.loadLayersModel('localstorage://model.json')
         .then(function (model) {
           console.log(model)
           const webrtcElement = document.getElementById("gum-local");
